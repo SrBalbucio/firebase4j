@@ -28,6 +28,7 @@ public class AuthV1 extends FirebaseAuth {
 
         User user = options.getGson().fromJson(response.body(), User.class);
         user.setInstance(this);
+        changeCurrentUser(user, false);
         return user;
     }
 
@@ -48,6 +49,7 @@ public class AuthV1 extends FirebaseAuth {
 
         User user = options.getGson().fromJson(response.body(), User.class);
         user.setInstance(this);
+        changeCurrentUser(user, false);
         return user;
     }
 
@@ -68,6 +70,7 @@ public class AuthV1 extends FirebaseAuth {
 
         User user = options.getGson().fromJson(response.body(), User.class);
         user.setInstance(this);
+        changeCurrentUser(user, false);
         return user;
     }
 

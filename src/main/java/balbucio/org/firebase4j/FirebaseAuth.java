@@ -1,9 +1,6 @@
 package balbucio.org.firebase4j;
 
-import balbucio.org.firebase4j.exception.EmailExistsException;
-import balbucio.org.firebase4j.exception.InvalidIdTokenException;
-import balbucio.org.firebase4j.exception.OperationNotAllowedException;
-import balbucio.org.firebase4j.exception.UserNotFoundException;
+import balbucio.org.firebase4j.exception.*;
 import balbucio.org.firebase4j.impl.auth.AuthV1;
 import balbucio.org.firebase4j.model.User;
 import balbucio.org.firebase4j.model.UserDetails;
@@ -13,29 +10,33 @@ import org.jsoup.Jsoup;
 
 /**
  * Classe com as definições do Firebase Auth.
- *
+ * <p>
  * A versão atual do Firebase Auth é a {@link AuthV1}.
  */
 public abstract class FirebaseAuth {
 
     /**
      * Cria uma nova instância do Firebase Auth com a versão mais recente.
+     *
      * @param options
      * @return
      */
-    public static FirebaseAuth newInstance(FirebaseOptions options){
+    public static FirebaseAuth newInstance(FirebaseOptions options) {
         return new AuthV1(options);
     }
 
     protected String API_URL = "";
     protected FirebaseOptions options;
+    protected User currentUser;
 
     public FirebaseAuth(FirebaseOptions options) {
         this.options = options;
+        this.currentUser = options.getPersistent().getCurrentUser(this);
     }
 
     /**
      * Configura uma conexão HTTP para o Firebase Authentication API
+     *
      * @param action - a ação que deve ser efetuada
      * @param method - o método HTTP que deve ser usado
      * @return - a conexão configurada para uso
@@ -54,7 +55,7 @@ public abstract class FirebaseAuth {
      * Cria um usuário com login anônimo.
      * EN-US:
      * Creates a user with an anonymous login.
-     *
+     * <p>
      * PT-BR:
      * Caso queira associar um usuário a um identificador de autenticação, utilize o método {@link #linkUserWithEmailAndPassword(User, String, String)}.
      * EN-US:
@@ -71,7 +72,7 @@ public abstract class FirebaseAuth {
      * EN-US
      * Creates a user with email and password.
      *
-     * @param email - Email of User
+     * @param email    - Email of User
      * @param password - Password of User
      * @return - created user
      * @throws Exception - em caso de erro na solicitação, pode retornar {@link EmailExistsException}, {@link OperationNotAllowedException}
@@ -84,7 +85,7 @@ public abstract class FirebaseAuth {
      * EN-US
      * Logs in to a user account using email and password.
      *
-     * @param email - Email of User
+     * @param email    - Email of User
      * @param password - Password of User
      * @return - user logged in
      * @throws Exception - em caso de erro na solicitação, pode retornar {@link UserNotFoundException}
@@ -163,6 +164,24 @@ public abstract class FirebaseAuth {
         delete(user.getIdToken());
     }
 
+    /**
+     * PT-BR
+     * Este método troca o usuário logado atual. Use o overwrite para sobrescrever se necessário.
+     * Todos os métodos que contém algum nível de login utilizam este método automaticamente, porém com overwrite DESABILITADO.
+     * Se o overwrite estiver desabilitado o {@link balbucio.org.firebase4j.exception.AlreadyLoggedException} será lançado, por meio dele você pode forçar um overwrite.
+     *
+     * @param user
+     * @param overwrite
+     */
+    public void changeCurrentUser(User user, boolean overwrite) throws AlreadyLoggedException {
+        if (currentUser != null && !overwrite) {
+            throw new AlreadyLoggedException(user);
+        }
+
+        this.currentUser = user;
+        options.getPersistent().saveCurrentUser(user);
+    }
+
     public Exception processError(Connection.Response response, Object data) {
         JSONObject error = new JSONObject(response.body())
                 .getJSONObject("error");
@@ -184,6 +203,6 @@ public abstract class FirebaseAuth {
 
     @Override
     public String toString() {
-        return "FirebaseAuth for "+options.getAppId();
+        return "FirebaseAuth for " + options.getAppId();
     }
 }
