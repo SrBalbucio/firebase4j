@@ -1,4 +1,4 @@
-![](assets\img\firebase-for-java-160.png)
+![](./assets/img/firebase-for-java-160.png)
 
 # Firebase SDK for Java
 
