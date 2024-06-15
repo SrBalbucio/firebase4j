@@ -5,7 +5,9 @@ import com.google.gson.GsonBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,9 +21,9 @@ public class FirebaseOptions {
                 new GsonBuilder().enableComplexMapKeySerialization().serializeNulls().create(),
                 json.getString("apiKey"),
                 json.getString("authDomain"),
-                json.getString("databaseURL"),
+                json.optString("databaseURL", ""),
                 json.getString("projectId"),
-                json.getString("storageBucket"),
+                json.optString("storageBucket", ""),
                 json.getString("messagingSenderId"),
                 json.getString("appId"),
                 json.getString("measurementId"),
@@ -32,7 +34,7 @@ public class FirebaseOptions {
     }
 
     public static FirebaseOptions fromJsonFile(File path) throws FileNotFoundException {
-        JSONObject json = new JSONObject(new FileReader(path));
+        JSONObject json = new JSONObject(new JSONTokener(new FileReader(path)));
         return fromJSON(json);
     }
 

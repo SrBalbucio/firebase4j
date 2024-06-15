@@ -1,0 +1,56 @@
+import balbucio.org.firebase4j.FirebaseAuth;
+import balbucio.org.firebase4j.FirebaseOptions;
+import balbucio.org.firebase4j.model.User;
+import lombok.SneakyThrows;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class FirebaseAuthTest {
+
+    private FirebaseOptions options;
+    private FirebaseAuth auth;
+    private List<User> createdUsers = new ArrayList<>();
+
+    @BeforeAll
+    @SneakyThrows
+    public void init(){
+        options = FirebaseOptions.fromJsonFile(new File("test-credentials.json"));
+        auth = new FirebaseAuth.V1(options);
+    }
+
+    @Test
+    @DisplayName("Criar conta anonima")
+    @Order(0)
+    public void anonymously() throws Exception{
+        User user = auth.signInAnonymously();
+        System.out.println(user);
+        assertNotNull(user);
+        createdUsers.add(user);
+    }
+
+    @Test
+    @DisplayName("Criar conta com email e senha")
+    @Order(1)
+    public void register() throws Exception{
+        User user = auth.signUp("dev.user123@dev.com", "secure69password");
+        System.out.println(user);
+        assertNotNull(user);
+        createdUsers.add(user);
+    }
+
+    @Test
+    @DisplayName("Deletar as contas criadas")
+    @Order(2)
+    @Disabled
+    public void deleteUsers() throws Exception{
+        for (User user : createdUsers) {
+            auth.deleteUser(user);
+        }
+    }
+}
