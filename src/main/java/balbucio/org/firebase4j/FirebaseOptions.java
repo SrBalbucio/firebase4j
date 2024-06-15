@@ -27,7 +27,8 @@ public class FirebaseOptions {
                 json.getString("messagingSenderId"),
                 json.getString("appId"),
                 json.getString("measurementId"),
-                null
+                null,
+                json.optString("emailTest", "dev65@dev.com")
         );
 
         return options;
@@ -48,4 +49,5 @@ public class FirebaseOptions {
     private String appId;
     private String measurementId;
     private String serviceAccount;
+    private String emailTest;
 }
