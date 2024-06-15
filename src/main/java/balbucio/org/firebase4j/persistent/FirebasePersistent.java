@@ -23,6 +23,7 @@ public interface FirebasePersistent {
      * @param user
      */
     public void saveCurrentUser(User user);
+    public void clear();
 
     public static FirebasePersistent fromFile(File file){
         return new FilePersistent(file);

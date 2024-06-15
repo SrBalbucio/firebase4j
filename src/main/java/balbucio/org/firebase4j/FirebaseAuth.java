@@ -4,6 +4,7 @@ import balbucio.org.firebase4j.exception.*;
 import balbucio.org.firebase4j.impl.auth.AuthV1;
 import balbucio.org.firebase4j.model.User;
 import balbucio.org.firebase4j.model.UserDetails;
+import lombok.Getter;
 import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -27,6 +28,7 @@ public abstract class FirebaseAuth {
 
     protected String API_URL = "";
     protected FirebaseOptions options;
+    @Getter
     protected User currentUser;
 
     public FirebaseAuth(FirebaseOptions options) {

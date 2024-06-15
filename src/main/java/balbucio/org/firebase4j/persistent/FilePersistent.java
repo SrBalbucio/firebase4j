@@ -14,7 +14,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 /**
  * PT-BR
  * Esta classe permite a persistência de dados por meio de um arquivo JSON simples.
- *
+ * <p>
  * EN-US
  * This class allows persistent data through a simple JSON file.
  */
@@ -32,6 +32,8 @@ public class FilePersistent implements FirebasePersistent {
         try {
             if (!file.exists()) {
                 file.createNewFile();
+                this.data = new JSONObject();
+                return;
             }
 
             this.data = new JSONObject(new JSONTokener(new FileReader(file)));
@@ -79,5 +81,11 @@ public class FilePersistent implements FirebasePersistent {
         userData.put("localId", user.getLocalId());
         data.put("currentUser", userData);
         saveAsync();
+    }
+
+    @Override
+    public void clear() {
+        this.data = new JSONObject();
+        file.delete();
     }
 }
