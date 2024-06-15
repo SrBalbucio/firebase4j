@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"balbucio.org.firebase4j"},{"l":"balbucio.org.firebase4j.exception"},{"l":"balbucio.org.firebase4j.impl.auth"},{"l":"balbucio.org.firebase4j.model"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"balbucio.org.firebase4j"},{"l":"balbucio.org.firebase4j.exception"},{"l":"balbucio.org.firebase4j.impl.auth"},{"l":"balbucio.org.firebase4j.model"},{"l":"balbucio.org.firebase4j.persistent"}]
