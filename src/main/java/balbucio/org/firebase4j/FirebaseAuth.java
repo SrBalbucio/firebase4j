@@ -146,7 +146,7 @@ public abstract class FirebaseAuth {
     /**
      * <h3>PT-BR</h3>
      * <p>Associa um usuário a um identificador de autenticação usando email e senha.</p>
-     * <h3>EN-US</h3
+     * <h3>EN-US</h3>
      * <p>Links a user to an authentication identifier using email and password.</p>
      *
      * @param user
