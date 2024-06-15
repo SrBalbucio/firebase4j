@@ -139,4 +139,24 @@ public class AuthV1 extends FirebaseAuth {
         user.setDisabled(userData.optBoolean("disabled"));
         user.setDetails(new UserDetails(userData.optString("displayName"), userData.optString("photoUrl")));
     }
+
+    @Override
+    public void linkUserWithEmailAndPassword(User user, String email, String password) throws Exception {
+        JSONObject data = new JSONObject()
+                .put("password", password)
+                .put("email", email)
+                .put("idToken", user.getIdToken())
+                .put("returnSecureToken", true);
+
+        Connection.Response response = getConnection("update", Connection.Method.POST)
+                .requestBody(data.toString()).execute();
+
+        if (response.statusCode() != 200) {
+            throw processError(response, data);
+        }
+
+        JSONObject userData = new JSONObject(response.body());
+        user.setEmail(userData.optString("email"));
+        user.setEmailVerified(userData.optBoolean("emailVerified"));
+    }
 }
