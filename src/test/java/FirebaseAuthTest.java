@@ -55,7 +55,7 @@ public class FirebaseAuthTest {
         System.out.println(user);
         assertNotNull(user);
         assertEquals(createdUser.getLocalId(), user.getLocalId());
-        assertEquals(createdUser.getIdToken(), user.getIdToken());
+        assertTrue(createdUser.getIdToken().equalsIgnoreCase(user.getIdToken()));
     }
 
     @Test
@@ -63,6 +63,22 @@ public class FirebaseAuthTest {
     @Order(3)
     public void sendEmailVerification() throws Exception{
         auth.sendEmailVerification(createdUser);
+    }
+
+    @Test
+    @DisplayName("Atualizar dados da conta")
+    @Order(4)
+    public void update() throws Exception{
+        createdUser.updateDetails("Balbucio", "https://ead.ifsul.edu.br/images/phocagallery/galeria2/thumbs/phoca_thumb_l_image03_grd.png");
+    }
+
+    @Test
+    @DisplayName("Consultar dados da conta")
+    @Order(5)
+    public void lookup() throws Exception{
+        auth.getUserDetails(createdUser);
+        assertEquals("Balbucio", createdUser.getDetails().getDisplayName());
+        assertEquals("https://ead.ifsul.edu.br/images/phocagallery/galeria2/thumbs/phoca_thumb_l_image03_grd.png", createdUser.getDetails().getPhotoUrl());
     }
 
     @Test

@@ -6,6 +6,7 @@ import balbucio.org.firebase4j.exception.OperationNotAllowedException;
 import balbucio.org.firebase4j.exception.UserNotFoundException;
 import balbucio.org.firebase4j.impl.auth.AuthV1;
 import balbucio.org.firebase4j.model.User;
+import balbucio.org.firebase4j.model.UserDetails;
 import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -38,6 +39,8 @@ public abstract class FirebaseAuth {
     public abstract void delete(String idToken) throws Exception;
 //    public abstract void sendPasswordResetEmail(String email) throws Exception;
     public abstract void sendEmailVerification(User user) throws Exception;
+    public abstract void updateDetails(User user, UserDetails details) throws Exception;
+    public abstract void getUserDetails(User user) throws Exception;
 
     public void deleteUser(User user) throws Exception {
         delete(user.getIdToken());
