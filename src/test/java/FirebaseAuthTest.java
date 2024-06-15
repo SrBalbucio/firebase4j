@@ -34,6 +34,7 @@ public class FirebaseAuthTest {
         System.out.println(user);
         assertNotNull(user);
         createdUsers.add(user);
+        auth.logout();
     }
 
     @Test
@@ -45,6 +46,7 @@ public class FirebaseAuthTest {
         assertNotNull(user);
         createdUsers.add(user);
         createdUser = user;
+        auth.logout();
     }
 
     @Test
@@ -55,7 +57,6 @@ public class FirebaseAuthTest {
         System.out.println(user);
         assertNotNull(user);
         assertEquals(createdUser.getLocalId(), user.getLocalId());
-        assertTrue(createdUser.getIdToken().equalsIgnoreCase(user.getIdToken()));
     }
 
     @Test
@@ -84,8 +85,8 @@ public class FirebaseAuthTest {
     @Test
     @DisplayName("Deletar as contas criadas")
     @Order(99)
-    @Disabled
     public void deleteUsers() throws Exception{
+        auth.logout();
         for (User user : createdUsers) {
             auth.deleteUser(user);
         }

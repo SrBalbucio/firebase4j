@@ -59,6 +59,11 @@ public class FirebaseOptions {
         public void clear() {
 
         }
+
+        @Override
+        public void removeCurrentUser() {
+
+        }
     };
     @NonNull
     private String apiKey;

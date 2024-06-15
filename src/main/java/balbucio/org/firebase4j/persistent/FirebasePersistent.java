@@ -27,6 +27,7 @@ public interface FirebasePersistent {
      * @param user
      */
     public void saveCurrentUser(User user);
+    public void removeCurrentUser();
 
     /**
      * <h3>PT-BR</h3>

@@ -162,4 +162,10 @@ public class AuthV1 extends FirebaseAuth {
         user.setEmail(userData.optString("email"));
         user.setEmailVerified(userData.optBoolean("emailVerified"));
     }
+
+    @Override
+    public void logout() {
+        currentUser = null;
+        options.getPersistent().removeCurrentUser();
+    }
 }

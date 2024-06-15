@@ -84,8 +84,14 @@ public class FilePersistent implements FirebasePersistent {
     }
 
     @Override
+    public void removeCurrentUser() {
+        data.remove("currentUser");
+        saveAsync();
+    }
+
+    @Override
     public void clear() {
         this.data = new JSONObject();
-        file.delete();
+        file.deleteOnExit();
     }
 }
