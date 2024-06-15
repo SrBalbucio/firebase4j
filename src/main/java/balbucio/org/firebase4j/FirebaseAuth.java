@@ -156,6 +156,12 @@ public abstract class FirebaseAuth {
      */
     public abstract void linkUserWithEmailAndPassword(User user, String email, String password) throws Exception;
 
+    /**
+     * <h3>PT-BR</h3>
+     * <p>Desloga do usuário atual.</p>
+     * <h3>EN-US</h3>
+     * <p>Logs out the current user.</p>
+     */
     public abstract void logout();
 
     /**

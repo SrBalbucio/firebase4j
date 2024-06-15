@@ -27,13 +27,21 @@ public interface FirebasePersistent {
      * @param user
      */
     public void saveCurrentUser(User user);
+
+    /**
+     * <h3>PT-BR</h3>
+     * <p>Remove o usuário atual da persistência.
+     * É ideal usar o {@link FirebaseAuth#logout()} se for para remover o usuário atual logado.</p>
+     * <h3>EN-US</h3>
+     * <p>Removes the currently logged in user from persistence.</p>
+     */
     public void removeCurrentUser();
 
     /**
      * <h3>PT-BR</h3>
      * <p>Limpa todos os dados salvos.</p>
      * <h3>EN-US</h3>
-     * <p>Clears all saved data.</p></h3>
+     * <p>Clears all saved data.</p>
      */
     public void clear();
 
