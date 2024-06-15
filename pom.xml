@@ -6,7 +6,19 @@
 
     <groupId>balbucio.org.firebase4j</groupId>
     <artifactId>firebase4j</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Firebase4J</name>
+    <description>Firebase SDK for Java Desktop Applications</description>
+
+    <developers>
+        <developer>
+            <name>João Gabriel</name>
+            <email>joao.gbasantos@hyperpowered.net</email>
+            <organization>HyperPowered</organization>
+            <organizationUrl>https://hyperpowered.net</organizationUrl>
+            <url>https://balbucio.xyz</url>
+        </developer>
+    </developers>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
