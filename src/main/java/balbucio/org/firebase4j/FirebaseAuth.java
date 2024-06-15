@@ -10,9 +10,11 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
 /**
- * Classe com as definições do Firebase Auth.
  * <p>
+ * Classe com as definições do Firebase Auth.
+ * <br>
  * A versão atual do Firebase Auth é a {@link AuthV1}.
+ * </p>
  */
 public abstract class FirebaseAuth {
 
@@ -53,15 +55,16 @@ public abstract class FirebaseAuth {
     }
 
     /**
-     * PT-BR:
-     * Cria um usuário com login anônimo.
-     * EN-US:
-     * Creates a user with an anonymous login.
+     * <h3>PT-BR</h3>
      * <p>
-     * PT-BR:
+     * Cria um usuário com login anônimo.
      * Caso queira associar um usuário a um identificador de autenticação, utilize o método {@link #linkUserWithEmailAndPassword(User, String, String)}.
-     * EN-US:
+     * </p>
+     * <h3>EN-US:</h3>
+     * <p>
+     * Creates a user with an anonymous login.
      * If you want to associate a user with an authentication identifier, use the {@link #linkUserWithEmailAndPassword(User, String, String)} method.
+     * </p>
      *
      * @return - created user
      * @throws Exception - em caso de erro na solicitação, pode retornar {@link balbucio.org.firebase4j.exception.OperationNotAllowedException}
@@ -69,10 +72,10 @@ public abstract class FirebaseAuth {
     public abstract User signInAnonymously() throws Exception;
 
     /**
-     * PT-BR
-     * Cria um usuário com email e senha.
-     * EN-US
-     * Creates a user with email and password.
+     * <h3>PT-BR</h3>
+     * <p>Cria um usuário com email e senha.</p>
+     * <h3>EN-US</h3>
+     * <p>Creates a user with email and password.</p>
      *
      * @param email    - Email of User
      * @param password - Password of User
@@ -82,10 +85,10 @@ public abstract class FirebaseAuth {
     public abstract User signUp(String email, String password) throws Exception;
 
     /**
-     * PT-BR
-     * Efetua login a uma conta usando email e senha.
-     * EN-US
-     * Logs in to a user account using email and password.
+     * <h3>PT-BR</h3>
+     * <p>Efetua login a uma conta usando email e senha.</p>
+     * <h3>EN-US</h3>
+     * <p>Logs in to a user account using email and password.</p>
      *
      * @param email    - Email of User
      * @param password - Password of User
@@ -95,10 +98,10 @@ public abstract class FirebaseAuth {
     public abstract User signIn(String email, String password) throws Exception;
 
     /**
-     * PT-BR
-     * Deleta um usuário com base no ID token fornecido.
-     * EN-US
-     * Deletes a user based on the provided ID token.
+     * <h3>PT-BR</h3>
+     * <p>Deleta um usuário com base no ID token fornecido.</p>
+     * <h3>EN-US</h3>
+     * <p>Deletes a user based on the provided ID token.</p>
      *
      * @param idToken - ID token of User
      * @throws Exception - em caso de erro na solicitação, pode retornar {@link InvalidIdTokenException}, {@link UserNotFoundException}
@@ -107,10 +110,10 @@ public abstract class FirebaseAuth {
 //    public abstract void sendPasswordResetEmail(String email) throws Exception;
 
     /**
-     * PT-BR
-     * Envia um email de verificação para o usuário fornecido.
-     * EN-US
-     * Sends a verification email to the provided user.
+     * <h3>PT-BR</h3>
+     * <p>Envia um email de verificação para o usuário fornecido.</p>
+     * <h3>EN-US</h3>
+     * <p>Sends a verification email to the provided user.</p>
      *
      * @param user
      * @throws Exception - em caso de erro na solicitação, pode retornar {@link InvalidIdTokenException}, {@link UserNotFoundException}
@@ -118,10 +121,10 @@ public abstract class FirebaseAuth {
     public abstract void sendEmailVerification(User user) throws Exception;
 
     /**
-     * PT-BR
-     * Atualiza os detalhes do usuário fornecido.
-     * EN-US
-     * Updates the details of the provided user.
+     * <h3>PT-BR</h3>
+     * <p>Atualiza os detalhes do usuário fornecido.</p>
+     * <h3>EN-US</h3>
+     * <p>Updates the details of the provided user.</p>
      *
      * @param user
      * @param details - detalhes do usuário a serem atualizados
@@ -130,10 +133,10 @@ public abstract class FirebaseAuth {
     public abstract void updateDetails(User user, UserDetails details) throws Exception;
 
     /**
-     * PT-BR
-     * Obtém os dados e os insere no user indicado. Geralmente os usuários não tem os dados definidos por padrão, portanto é importante efetuar esta chamada.
-     * EN-US
-     * Retrieves the user's data and inserts it into the indicated user. Generally, users do not have the data defined by default, so this call is essential.
+     * <h3>PT-BR</h3>
+     * <p>Obtém os dados e os insere no user indicado. Geralmente os usuários não tem os dados definidos por padrão, portanto é importante efetuar esta chamada.</p>
+     * <h3>EN-US</h3>
+     * <p>Retrieves the user's data and inserts it into the indicated user. Generally, users do not have the data defined by default, so this call is essential.</p>
      *
      * @param user - usuário que vai ter os dados carregados.
      * @throws Exception - em caso de erro na solicitação, pode retornar {@link InvalidIdTokenException}, {@link UserNotFoundException}
@@ -141,10 +144,10 @@ public abstract class FirebaseAuth {
     public abstract void getUserDetails(User user) throws Exception;
 
     /**
-     * PT-BR
-     * Associa um usuário a um identificador de autenticação usando email e senha.
-     * EN-US
-     * Links a user to an authentication identifier using email and password.
+     * <h3>PT-BR</h3>
+     * <p>Associa um usuário a um identificador de autenticação usando email e senha.</p>
+     * <h3>EN-US</h3
+     * <p>Links a user to an authentication identifier using email and password.</p>
      *
      * @param user
      * @param email
@@ -154,10 +157,10 @@ public abstract class FirebaseAuth {
     public abstract void linkUserWithEmailAndPassword(User user, String email, String password) throws Exception;
 
     /**
-     * PT-BR
-     * Deleta um usuário.
-     * EN-US
-     * Deletes a user.
+     * <h3>PT-BR</h3>
+     * <p>Deleta um usuário.</p>
+     * <h3>EN-US</h3>
+     * <p>Deletes a user.</p>
      *
      * @param user - User
      * @throws Exception
@@ -167,10 +170,10 @@ public abstract class FirebaseAuth {
     }
 
     /**
-     * PT-BR
-     * Este método troca o usuário logado atual. Use o overwrite para sobrescrever se necessário.
+     * <h3>PT-BR</h3>
+     * <p>Este método troca o usuário logado atual. Use o overwrite para sobrescrever se necessário.
      * Todos os métodos que contém algum nível de login utilizam este método automaticamente, porém com overwrite DESABILITADO.
-     * Se o overwrite estiver desabilitado o {@link balbucio.org.firebase4j.exception.AlreadyLoggedException} será lançado, por meio dele você pode forçar um overwrite.
+     * Se o overwrite estiver desabilitado o {@link balbucio.org.firebase4j.exception.AlreadyLoggedException} será lançado, por meio dele você pode forçar um overwrite.</p>
      *
      * @param user
      * @param overwrite

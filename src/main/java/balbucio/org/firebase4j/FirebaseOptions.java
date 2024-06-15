@@ -76,12 +76,16 @@ public class FirebaseOptions {
     private String emailTest;
 
     /**
-     * PT-BR
+     * <h3>PT-BR</h3>
+     * <p>
      * Caso deseje manter o estado atual das informações, como o usuário logado, as informações dele e afins, é necessário adicionar algum tipo de persistência.
      * Você pode optar por algum desses: {@link balbucio.org.firebase4j.persistent.FilePersistent}
-     * EN-US
+     * </p>
+     * <h3>EN-US</h3>
+     * <p>
      * In case you want to keep the current state of information, such as the logged-in user's information and so on, you need to add some type of persistence.
      * You can choose among: {@link balbucio.org.firebase4j.persistent.FilePersistent}
+     * </p>
      * @param persistent
      */
     public void setPersistent(FirebasePersistent persistent) {

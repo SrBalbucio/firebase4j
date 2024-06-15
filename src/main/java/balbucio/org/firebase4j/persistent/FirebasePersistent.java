@@ -8,10 +8,10 @@ import java.io.File;
 public interface FirebasePersistent {
 
     /**
-     * PT-BR
-     * Recupera o usuário logado atual.
-     * EN-US
-     * Retrieves the currently logged in user.
+     * <h3>PT-BR</h3>
+     * <p>Recupera o usuário logado atual.</p>
+     * <h3>EN-US</h3>
+     * <p>Retrieves the currently logged in user.</p>
      *
      * @param auth
      * @return
@@ -19,13 +19,24 @@ public interface FirebasePersistent {
     public User getCurrentUser(FirebaseAuth auth);
 
     /**
-     * Salva um usuário como o atualmente logado.
+     * <h3>PT-BR</h3>
+     * <p>Salva um usuário como o atualmente logado.</p>
+     * <h3>EN-US</h3>
+     * <p>Saves the currently logged in user.</p>
+     *
      * @param user
      */
     public void saveCurrentUser(User user);
+
+    /**
+     * <h3>PT-BR</h3>
+     * <p>Limpa todos os dados salvos.</p>
+     * <h3>EN-US</h3>
+     * <p>Clears all saved data.</p></h3>
+     */
     public void clear();
 
-    public static FirebasePersistent fromFile(File file){
+    public static FirebasePersistent fromFile(File file) {
         return new FilePersistent(file);
     }
 }
