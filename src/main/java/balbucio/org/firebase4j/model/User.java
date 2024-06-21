@@ -1,13 +1,11 @@
 package balbucio.org.firebase4j.model;
 
 import balbucio.org.firebase4j.FirebaseAuth;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Data
 @ToString
 /**
@@ -16,7 +14,16 @@ import lombok.ToString;
  */
 public class User {
 
+    public static User getWithRefreshToken(String refreshToken){
+        return null;
+    }
+
+    public static User withIdToken(String idToken){
+        return new User(idToken);
+    }
+
     private FirebaseAuth instance;
+    @NonNull
     private String idToken;
     private String refreshToken;
     private long expiresIn;

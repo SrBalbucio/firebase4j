@@ -33,7 +33,7 @@ public abstract class FirebaseAuth {
     @Getter
     protected User currentUser;
 
-    public FirebaseAuth(FirebaseOptions options) {
+    protected FirebaseAuth(FirebaseOptions options) {
         this.options = options;
         this.currentUser = options.getPersistent().getCurrentUser(this);
     }
