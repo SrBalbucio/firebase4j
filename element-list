@@ -1,5 +1,6 @@
 balbucio.org.firebase4j
 balbucio.org.firebase4j.exception
 balbucio.org.firebase4j.impl.auth
+balbucio.org.firebase4j.impl.firestore
 balbucio.org.firebase4j.model
 balbucio.org.firebase4j.persistent
