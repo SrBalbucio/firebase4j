@@ -6,9 +6,7 @@ This is the unofficial Firebase SDK for pure Java.
 
 With this SDK it is possible to develop applications for end users using Firebase technologies.
 
-Firebase is a trademark of Google LLC. 
-
-The Firebase4J logo is for demonstration purposes only and is not official. You should not use or replace the official logo in your applications. Find out more here.
+Firebase is a trademark of Google LLC.
 
 > This SDK is still under development.
 
