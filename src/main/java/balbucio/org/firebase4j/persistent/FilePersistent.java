@@ -12,11 +12,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 /**
- * PT-BR
- * Esta classe permite a persistência de dados por meio de um arquivo JSON simples.
+ * <h1>PT-BR</h1>
+ * <p>Esta classe permite a persistência de dados por meio de um arquivo JSON simples.</p>
  * <p>
- * EN-US
- * This class allows persistent data through a simple JSON file.
+ * <h1>EN-US</h1>
+ * <p>This class allows persistent data through a simple JSON file.</p>
  */
 public class FilePersistent implements FirebasePersistent {
 

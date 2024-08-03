@@ -39,11 +39,11 @@ public class User {
     private boolean customAuth = false;
 
     /**
-     * <h3>PT-BR</h3>
+     * <h1>PT-BR</h1>
      * <p>
      * Atualiza os detalhes do usuário.
      * </p>
-     * <h3>EN-US</h3>
+     * <h1>EN-US</h1>
      * <p>Updates the user's details.</p>
      *
      * @throws Exception
@@ -53,9 +53,9 @@ public class User {
     }
 
     /**
-     * <h3>PT-BR</h3>
+     * <h1>PT-BR</h1>
      * <p>Adiciona e atualiza os detalhes do usuário.</p>
-     * <h3>EN-US</h3>
+     * <h1>EN-US</h1>
      * <p>Adds and updates the user's details.</p>
      *
      * @param displayName - nome de exibição do usuário.
@@ -68,7 +68,7 @@ public class User {
     }
 
     /**
-     * <h3>PT-BR</h3>
+     * <h1>PT-BR</h1>
      * <p>Envia o email de verificação para o usuário.</p>
      * EN-US
      * <p>Sends the email verification for the user.</p>
@@ -80,9 +80,9 @@ public class User {
     }
 
     /**
-     * <h3>PT-BR</h3>
+     * <h1>PT-BR</h1>
      * <p>Deleta este usuário.</p>
-     * <h3>EN-US</h3>
+     * <h1>EN-US</h1>
      * <p>Deletes this user.</p>
      *
      * @throws Exception

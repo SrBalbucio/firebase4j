@@ -20,7 +20,7 @@ import java.io.FileReader;
 @Data
 public class FirebaseOptions {
 
-    public static FirebaseOptions fromJSON(JSONObject json){
+    public static FirebaseOptions fromJSON(JSONObject json) {
         FirebaseOptions options = new FirebaseOptions(
                 new GsonBuilder().enableComplexMapKeySerialization().serializeNulls().create(),
                 json.getString("apiKey"),
@@ -96,6 +96,7 @@ public class FirebaseOptions {
      * In case you want to keep the current state of information, such as the logged-in user's information and so on, you need to add some type of persistence.
      * You can choose among: {@link balbucio.org.firebase4j.persistent.FilePersistent}
      * </p>
+     *
      * @param persistent
      */
     public void setPersistent(FirebasePersistent persistent) {
