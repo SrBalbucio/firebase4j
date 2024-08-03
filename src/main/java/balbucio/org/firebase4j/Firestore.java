@@ -4,7 +4,7 @@ import balbucio.org.firebase4j.impl.firestore.FirestoreV1;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
-public class Firestore {
+public abstract class Firestore {
 
     public static Firestore newInstance(FirebaseOptions options, String databaseName){
         return new FirestoreV1(options, databaseName);
@@ -23,4 +23,6 @@ public class Firestore {
         Connection connection = Jsoup.connect(API_URL.replace("{project_id}", options.getProjectId()).replace("{database_id}", databaseName));
         return null;
     }
+
+    public abstract
 }
