@@ -35,10 +35,15 @@ public class FirestoreV1 extends Firestore {
         }
 
         JSONObject payload = new JSONObject(response.body());
-        DocumentSnapshot documentSnapshot = new DocumentSnapshot();
+        DocumentSnapshot documentSnapshot = new DocumentSnapshot(database);
         documentSnapshot.fromJSON(payload);
 
         return documentSnapshot;
+    }
+
+    @Override
+    public void updateDocument(DocumentSnapshot documentSnapshot) {
+
     }
 
 

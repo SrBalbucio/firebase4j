@@ -1,6 +1,8 @@
 package balbucio.org.firebase4j.model;
 
 import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,10 +13,14 @@ import java.util.List;
 import java.util.Map;
 
 @ToString
+@RequiredArgsConstructor
 public class DocumentSnapshot {
 
     @Getter
     private String path;
+    @Getter
+    @NonNull
+    private String database;
     @Getter
     private String name = "";
     @Getter
@@ -54,6 +60,34 @@ public class DocumentSnapshot {
             JSONObject value = fields.getJSONObject(key);
             this.fields.put(key, deserializeValue(value));
         }
+    }
+
+    public static JSONObject serializeValue(Object value) {
+        JSONObject json = new JSONObject();
+        if(value instanceof String){
+            json.put("stringValue", value);
+        } else if(value instanceof Integer){
+            json.put("integerValue", value);
+        } else if(value instanceof Boolean){
+            json.put("booleanValue", value);
+        } else if(value instanceof Map){
+            JSONObject mapValues = new JSONObject();
+            JSONObject fields = new JSONObject();
+            Map<String, Object> map = (Map<String, Object>) value;
+            map.forEach((key, value1) -> {
+                fields.put(key, serializeValue(value1));
+            });
+            mapValues.put("fields", fields);
+            json.put("mapValue", mapValues);
+        } else if(value instanceof List){
+            JSONObject arrayValues = new JSONObject();
+            JSONArray array = new JSONArray();
+            List<Object> list = (List<Object>) value;
+            list.forEach((obj) -> array.put(serializeValue(list)));
+            arrayValues.put("values", array);
+            json.put("arrayValue", arrayValues);
+        }
+        return json;
     }
 
     public static Object deserializeValue(JSONObject value){
