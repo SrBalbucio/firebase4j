@@ -4,6 +4,7 @@ import balbucio.org.firebase4j.exception.*;
 import balbucio.org.firebase4j.impl.auth.AuthV1;
 import balbucio.org.firebase4j.model.User;
 import balbucio.org.firebase4j.model.UserDetails;
+import com.sun.jdi.VMDisconnectedException;
 import lombok.Getter;
 import org.json.JSONObject;
 import org.jsoup.Connection;
@@ -195,6 +196,10 @@ public abstract class FirebaseAuth {
         options.getPersistent().saveCurrentUser(user);
     }
 
+    public boolean isLogged(){
+        return currentUser != null;
+    }
+
     public Exception processError(Connection.Response response, Object data) {
         JSONObject error = new JSONObject(response.body())
                 .getJSONObject("error");
@@ -209,6 +214,8 @@ public abstract class FirebaseAuth {
                 return new InvalidIdTokenException(msg, ((JSONObject) data).getString("idToken"));
             case "USER_NOT_FOUND":
                 return new UserNotFoundException(msg, ((JSONObject) data).getString("idToken"));
+            case "ADMIN_ONLY_OPERATION":
+                return new VMDisconnectedException("The method used for login is not configured!");
             default:
                 return new RuntimeException(msg);
         }

@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Data
@@ -39,6 +40,12 @@ public class FirebaseOptions {
 
     public static FirebaseOptions fromJsonFile(File path) throws FileNotFoundException {
         JSONObject json = new JSONObject(new JSONTokener(new FileReader(path)));
+        return fromJSON(json);
+    }
+
+    public static FirebaseOptions fromClasspath(String path) {
+        JSONObject json = new JSONObject(
+                new JSONTokener(Objects.requireNonNull(FirebaseOptions.class.getResourceAsStream(path))));
         return fromJSON(json);
     }
 
