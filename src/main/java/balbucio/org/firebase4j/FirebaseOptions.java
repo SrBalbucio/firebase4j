@@ -2,6 +2,7 @@ package balbucio.org.firebase4j;
 
 import balbucio.org.firebase4j.model.User;
 import balbucio.org.firebase4j.persistent.FirebasePersistent;
+import balbucio.responsivescheduler.ResponsiveScheduler;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,8 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Data
 public class FirebaseOptions {
+
+    public static ResponsiveScheduler scheduler = new ResponsiveScheduler();
 
     public static FirebaseOptions fromJSON(JSONObject json) {
         FirebaseOptions options = new FirebaseOptions(

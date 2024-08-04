@@ -58,6 +58,22 @@
             <artifactId>jsoup</artifactId>
             <version>1.17.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.h2database/h2-mvstore -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2-mvstore</artifactId>
+            <version>2.3.230</version>
+        </dependency>
+        <dependency>
+            <groupId>balbucio.throwable</groupId>
+            <artifactId>throwable</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>balbucio.responsivescheduler</groupId>
+            <artifactId>responsive-scheduler</artifactId>
+            <version>2.0</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
