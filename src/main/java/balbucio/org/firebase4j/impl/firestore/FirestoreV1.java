@@ -30,13 +30,13 @@ public class FirestoreV1 extends Firestore {
     public DocumentSnapshot getDocument(String database, String collection, String id) throws Exception {
         Connection.Response response = getDbConnection("/documents/"+collection+"/"+id, database, Connection.Method.GET).execute();
 
-        System.out.println(response.body());
-
         if (response.statusCode() != 200) {
             throw processError(response, null);
         }
 
+        JSONObject payload = new JSONObject(response.body());
         DocumentSnapshot documentSnapshot = new DocumentSnapshot();
+        documentSnapshot.fromJSON(payload);
 
         return documentSnapshot;
     }

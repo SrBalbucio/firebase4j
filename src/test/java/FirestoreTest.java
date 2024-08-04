@@ -18,6 +18,7 @@ public class FirestoreTest {
     private FirebaseAuth auth;
     private Firestore firestore;
     private User createdUser;
+    private DocumentSnapshot snapshot;
 
     @BeforeAll
     @SneakyThrows
@@ -32,7 +33,8 @@ public class FirestoreTest {
     @DisplayName("Get Document")
     @Order(0)
     public void getDocument() throws Exception{
-        DocumentSnapshot snapshot = firestore.getDocument("users", "srbalbucio");
+        snapshot = firestore.getDocument("users", "srbalbucio");
+        assertEquals("Joao Gabriel", snapshot.asString("name"));
     }
 
     @Test
