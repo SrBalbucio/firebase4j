@@ -101,5 +101,6 @@ public abstract class Firestore {
     public abstract DocumentSnapshot getDocument(String collection, String id) throws Exception;
     public abstract DocumentSnapshot getDocument(String database, String collection, String id) throws Exception;
     public abstract DocumentSnapshot updateDocument(String database, String collection, String id, Map<String, Object> fields) throws Exception;
+    public abstract DocumentSnapshot updateDocument(String collection, String id, Map<String, Object> fields) throws Exception;
     public abstract void updateDocument(DocumentSnapshot documentSnapshot) throws Exception;
 }

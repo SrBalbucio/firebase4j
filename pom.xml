@@ -6,7 +6,7 @@
 
     <groupId>balbucio.org.firebase4j</groupId>
     <artifactId>firebase4j</artifactId>
-    <version>0.0.2.ALPHA-01</version>
+    <version>0.0.2.ALPHA-02</version>
     <name>Firebase4J</name>
     <description>Firebase SDK for Java Desktop Applications</description>
 

@@ -6,8 +6,6 @@ import balbucio.org.firebase4j.model.DocumentSnapshot;
 import balbucio.org.firebase4j.model.FirestoreDatabase;
 import org.json.JSONObject;
 import org.jsoup.Connection;
-
-import javax.swing.text.Document;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +40,11 @@ public class FirestoreV1 extends Firestore {
         documentSnapshot.fromPayload(payload);
 
         return documentSnapshot;
+    }
+
+    @Override
+    public DocumentSnapshot updateDocument(String collection, String id, Map<String, Object> fields) throws Exception {
+        return updateDocument(databaseName, collection, id, fields);
     }
 
     @Override
