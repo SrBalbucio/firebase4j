@@ -86,14 +86,14 @@
 
     <distributionManagement>
         <repository>
-            <id>github</id>
-            <name>GitHub OWNER Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/srbalbucio/firebase4j</url>
+            <id>hyperpowered-maven-releases</id>
+            <name>HyperPowered Maven Repository</name>
+            <url>https://maven.hyperpowered.net/releases</url>
         </repository>
         <snapshotRepository>
-            <id>github</id>
-            <name>GitHub OWNER Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/srbalbucio/firebase4j</url>
+            <id>hyperpowered-maven-snapshots</id>
+            <name>HyperPowered Maven Repository</name>
+            <url>https://maven.hyperpowered.net/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 

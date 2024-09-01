@@ -38,6 +38,14 @@ public class FirestoreTest {
     }
 
     @Test
+    @DisplayName("Update Document")
+    @Order(1)
+    public void updateDocument() throws Exception {
+        firestore.updateDocument(snapshot.put("name", "Alberto"));
+        assertEquals("Alberto", snapshot.asString("name"));
+    }
+
+    @Test
     @DisplayName("Deletar as contas criadas")
     @Order(99)
     public void deleteUsers() throws Exception {
