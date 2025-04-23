@@ -2,17 +2,12 @@ package balbucio.org.firebase4j;
 
 import balbucio.org.firebase4j.model.User;
 import balbucio.org.firebase4j.persistent.FirebasePersistent;
-import balbucio.responsivescheduler.ResponsiveScheduler;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -23,6 +18,8 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 @RequiredArgsConstructor
 @Data
@@ -31,8 +28,6 @@ public class FirebaseOptions {
     static {
         allowMethods("PATCH");
     }
-
-    public static ResponsiveScheduler scheduler = new ResponsiveScheduler();
 
     public static FirebaseOptions fromJSON(JSONObject json) {
         FirebaseOptions options = new FirebaseOptions(
@@ -138,7 +133,7 @@ public class FirebaseOptions {
             methodsSet.addAll(Arrays.asList(methods));
             String[] newMethods = methodsSet.toArray(new String[0]);
 
-            methodsField.set(null/*static field*/, newMethods);
+            methodsField.set(null, newMethods);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new IllegalStateException(e);
         }

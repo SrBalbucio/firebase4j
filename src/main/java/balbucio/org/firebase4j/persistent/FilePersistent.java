@@ -2,7 +2,6 @@ package balbucio.org.firebase4j.persistent;
 
 import balbucio.org.firebase4j.FirebaseAuth;
 import balbucio.org.firebase4j.model.User;
-import balbucio.responsivescheduler.ResponsiveScheduler;
 import balbucio.throwable.Throwable;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -10,6 +9,7 @@ import org.json.JSONTokener;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
@@ -24,9 +24,11 @@ public class FilePersistent implements FirebasePersistent {
 
     private File file;
     private JSONObject data;
+    private Executor executor;
 
-    public FilePersistent(File file) {
+    public FilePersistent(File file, Executor executor) {
         this.file = file;
+        this.executor = executor;
         prepare();
     }
 
@@ -43,12 +45,12 @@ public class FilePersistent implements FirebasePersistent {
     }
 
     private void saveAsync() {
-        ResponsiveScheduler.run((rs) -> {
+        executor.execute(Throwable.throwRunnable(() -> {
             FileWriter writer = new FileWriter(file);
             writer.write(data.toString());
             writer.flush();
             writer.close();
-        });
+        }));
     }
 
     @Override
