@@ -33,7 +33,7 @@ public class FirebaseOptions {
                 new GsonBuilder().enableComplexMapKeySerialization().serializeNulls().create(),
                 json.getString("apiKey"),
                 json.getString("authDomain"),
-                json.optString("databaseURL", ""),
+                json.optString("databaseURL", json.optString("databaseUrl", "")),
                 json.getString("projectId"),
                 json.optString("storageBucket", ""),
                 json.getString("messagingSenderId"),
