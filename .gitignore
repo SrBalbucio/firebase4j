@@ -39,3 +39,4 @@ build/
 
 test-credentials.json
 firebase.persistent
+*.db
