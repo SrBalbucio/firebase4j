@@ -100,7 +100,6 @@ public class FirebaseOptions {
     private static void allowMethods(String... methods) {
         try {
             Field methodsField = HttpURLConnection.class.getDeclaredField("methods");
-
             Field modifiersField = Field.class.getDeclaredField("modifiers");
             modifiersField.setAccessible(true);
             modifiersField.setInt(methodsField, methodsField.getModifiers() & ~Modifier.FINAL);
@@ -114,7 +113,7 @@ public class FirebaseOptions {
 
             methodsField.set(null, newMethods);
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new IllegalStateException(e);
+            e.printStackTrace();
         }
     }
 }
