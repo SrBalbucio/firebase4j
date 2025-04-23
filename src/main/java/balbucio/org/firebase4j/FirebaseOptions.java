@@ -1,6 +1,7 @@
 package balbucio.org.firebase4j;
 
 import balbucio.org.firebase4j.model.User;
+import balbucio.org.firebase4j.persistent.EmptyPersistent;
 import balbucio.org.firebase4j.persistent.FirebasePersistent;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -18,8 +19,6 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 @RequiredArgsConstructor
 @Data
@@ -59,27 +58,7 @@ public class FirebaseOptions {
 
     @NonNull
     private Gson gson;
-    private FirebasePersistent persistent = new FirebasePersistent() {
-        @Override
-        public User getCurrentUser(FirebaseAuth auth) {
-            return null;
-        }
-
-        @Override
-        public void saveCurrentUser(User user) {
-
-        }
-
-        @Override
-        public void clear() {
-
-        }
-
-        @Override
-        public void removeCurrentUser() {
-
-        }
-    };
+    private FirebasePersistent persistent = new EmptyPersistent();
     @NonNull
     private String apiKey;
     @NonNull
@@ -104,12 +83,12 @@ public class FirebaseOptions {
      * <h3>PT-BR</h3>
      * <p>
      * Caso deseje manter o estado atual das informações, como o usuário logado, as informações dele e afins, é necessário adicionar algum tipo de persistência.
-     * Você pode optar por algum desses: {@link balbucio.org.firebase4j.persistent.FilePersistent}
+     * Você pode optar por algum desses: {@link balbucio.org.firebase4j.persistent.FilePersistent}, {@link balbucio.org.firebase4j.persistent.MVStorePersistent}
      * </p>
      * <h3>EN-US</h3>
      * <p>
      * In case you want to keep the current state of information, such as the logged-in user's information and so on, you need to add some type of persistence.
-     * You can choose among: {@link balbucio.org.firebase4j.persistent.FilePersistent}
+     * You can choose among: {@link balbucio.org.firebase4j.persistent.FilePersistent}, {@link balbucio.org.firebase4j.persistent.MVStorePersistent}
      * </p>
      *
      * @param persistent
