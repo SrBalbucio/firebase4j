@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
+import java.util.concurrent.Executors;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -19,7 +20,7 @@ public class FilePersistentTest {
     @BeforeAll
     public void create() throws Exception {
         options = FirebaseOptions.fromJsonFile(new File("test-credentials.json"));
-        options.setPersistent(new FilePersistent(new File("firebase.persistent")));
+        options.setPersistent(new FilePersistent(new File("firebase.persistent"), Executors.newCachedThreadPool()));
         auth = FirebaseAuth.newInstance(options);
     }
 
