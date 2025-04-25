@@ -24,7 +24,7 @@ public class ServerAppCheckV1 extends FirebaseServerAppCheck {
 
     @Override
     public String getJWTToken() {
-        if(nextTokenUpdate.before(new Date()) && jwtToken != null) {
+        if (nextTokenUpdate.before(new Date()) && jwtToken != null) {
             return jwtToken;
         }
 
@@ -65,8 +65,8 @@ public class ServerAppCheckV1 extends FirebaseServerAppCheck {
                         .toString());
 
         Connection.Response response = connection.execute();
-        System.out.println(response.body());
-        if(response.statusCode() != 200) {
+
+        if (response.statusCode() != 200) {
             return Optional.empty();
         }
 

@@ -13,7 +13,6 @@ import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.net.HttpURLConnection;
-import java.nio.file.Files;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
@@ -33,7 +32,7 @@ public class FirebaseOptions {
                 json.getString("apiKey"),
                 json.getString("authDomain"),
                 json.optString("databaseURL", json.optString("databaseUrl", "")),
-                json.optString("projectId", json.getString("id")),
+                json.optString("projectId", json.optString("id")),
                 json.optString("storageBucket", ""),
                 json.getString("messagingSenderId"),
                 json.getString("appId"),
@@ -116,7 +115,7 @@ public class FirebaseOptions {
     public FirebaseOptions withServiceAccount(JSONObject serviceAccount) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
         this.serviceAccount = serviceAccount;
         this.serviceAccountCredentials = GoogleCredentials.fromStream(new ByteArrayInputStream(serviceAccount.toString().getBytes()))
-                .createScoped("https://www.googleapis.com/auth/firebase.appcheck");
+                .createScoped("https://www.googleapis.com/auth/firebase");
         createRSAKey();
         return this;
     }
@@ -124,7 +123,7 @@ public class FirebaseOptions {
     public FirebaseOptions withServiceAccount(InputStream serviceAccount) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
         this.serviceAccount = new JSONObject(new JSONTokener(serviceAccount));
         this.serviceAccountCredentials = GoogleCredentials.fromStream(serviceAccount)
-                .createScoped("https://www.googleapis.com/auth/firebase.appcheck");
+                .createScoped("https://www.googleapis.com/auth/firebase");
         createRSAKey();
         return this;
     }
