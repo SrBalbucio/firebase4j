@@ -4,6 +4,7 @@ import balbucio.org.firebase4j.FirebaseAuth;
 import balbucio.org.firebase4j.model.User;
 
 import java.io.File;
+import java.util.concurrent.Executors;
 
 public interface FirebasePersistent {
 
@@ -46,6 +47,10 @@ public interface FirebasePersistent {
     public void clear();
 
     public static FirebasePersistent fromFile(File file) {
-        return new FilePersistent(file);
+        return new FilePersistent(file, Executors.newCachedThreadPool());
+    }
+
+    public static MVStorePersistent fromMVStore(File file) {
+        return new MVStorePersistent(file);
     }
 }

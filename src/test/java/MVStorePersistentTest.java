@@ -2,16 +2,17 @@ import balbucio.org.firebase4j.FirebaseAuth;
 import balbucio.org.firebase4j.FirebaseOptions;
 import balbucio.org.firebase4j.model.User;
 import balbucio.org.firebase4j.persistent.FilePersistent;
+import balbucio.org.firebase4j.persistent.MVStorePersistent;
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.File;
-import java.util.concurrent.Executors;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class FilePersistentTest {
+public class MVStorePersistentTest {
 
     private FirebaseOptions options;
     private FirebaseAuth auth;
@@ -20,7 +21,7 @@ public class FilePersistentTest {
     @BeforeAll
     public void create() throws Exception {
         options = FirebaseOptions.fromJsonFile(new File("test-credentials.json"));
-        options.setPersistent(new FilePersistent(new File("firebase.persistent"), Executors.newCachedThreadPool()));
+        options.setPersistent(new MVStorePersistent(new File("firebase.mv.db")));
         auth = FirebaseAuth.newInstance(options);
     }
 

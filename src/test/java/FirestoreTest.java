@@ -22,7 +22,7 @@ public class FirestoreTest {
 
     @BeforeAll
     @SneakyThrows
-    public void init(){
+    public void init() {
         options = FirebaseOptions.fromJsonFile(new File("test-credentials.json"));
         auth = FirebaseAuth.newInstance(options);
         firestore = Firestore.newInstance(options, "(default)", auth);
@@ -32,17 +32,27 @@ public class FirestoreTest {
     @Test
     @DisplayName("Get Document")
     @Order(0)
-    public void getDocument() throws Exception{
+    public void getDocument() throws Exception {
         snapshot = firestore.getDocument("users", "srbalbucio");
         assertEquals("Joao Gabriel", snapshot.asString("name"));
     }
 
     @Test
+    @DisplayName("Update Document")
+    @Order(1)
+    public void updateDocument() throws Exception {
+        firestore.updateDocument(snapshot.put("name", "Alberto"));
+        assertEquals("Alberto", snapshot.asString("name"));
+    }
+
+    @Test
     @DisplayName("Deletar as contas criadas")
     @Order(99)
-    public void deleteUsers() throws Exception{
+    public void deleteUsers() throws Exception {
         auth.logout();
-        createdUser.delete();
+        if (createdUser != null) {
+            createdUser.delete();
+        }
     }
 
 }

@@ -10,8 +10,13 @@ import org.jsoup.Jsoup;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Firestore {
+
+    public static Firestore newInstance(FirebaseOptions options){
+        return newInstance(options, "(default)");
+    }
 
     public static Firestore newInstance(FirebaseOptions options, String databaseName) {
         return newInstance(options, databaseName, null);
@@ -51,7 +56,12 @@ public abstract class Firestore {
     }
 
     public Connection getDbConnection(String action, String databaseName, Connection.Method method) {
+        return getDbConnection(action, databaseName, "", method);
+    }
+
+    public Connection getDbConnection(String action, String databaseName, String queryPath, Connection.Method method) {
         Connection connection = Jsoup.connect(DATABASE_URL
+                        .replace("{query}", queryPath)
                         .replace("{project_id}", options.getProjectId())
                         .replace("{database_id}", databaseName)
                         .replace("{action}", action)
@@ -69,7 +79,6 @@ public abstract class Firestore {
         return  connection;
     }
 
-
     public Exception processError(Connection.Response response, Object data) {
         JSONObject json = new JSONObject(response.body());
 
@@ -79,6 +88,8 @@ public abstract class Firestore {
                 case 403:
                     return new PermissionDeniedException(error.getInt("code"));
                 default:
+                    System.out.println(response.statusCode());
+                    System.out.println(response.body());
                     return new RuntimeException("Este erro não foi identificado ou ainda não foi listado! Code: " + error.getInt("code"));
             }
         }
@@ -86,7 +97,9 @@ public abstract class Firestore {
     }
 
     public abstract List<FirestoreDatabase> listDatabases();
-
     public abstract DocumentSnapshot getDocument(String collection, String id) throws Exception;
     public abstract DocumentSnapshot getDocument(String database, String collection, String id) throws Exception;
+    public abstract DocumentSnapshot updateDocument(String database, String collection, String id, Map<String, Object> fields) throws Exception;
+    public abstract DocumentSnapshot updateDocument(String collection, String id, Map<String, Object> fields) throws Exception;
+    public abstract void updateDocument(DocumentSnapshot documentSnapshot) throws Exception;
 }

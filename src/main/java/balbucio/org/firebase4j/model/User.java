@@ -14,11 +14,11 @@ import lombok.*;
  */
 public class User {
 
-    public static User getWithRefreshToken(String refreshToken){
+    public static User getWithRefreshToken(String refreshToken) {
         return null;
     }
 
-    public static User withIdToken(String idToken){
+    public static User withIdToken(String idToken) {
         return new User(idToken);
     }
 
@@ -28,7 +28,7 @@ public class User {
     private String refreshToken;
     private long expiresIn;
     private String localId;
-    private String email;
+    private String email = "";
     private boolean emailVerified;
     private UserDetails details;
     private double passwordUpdatedAt;
@@ -37,6 +37,24 @@ public class User {
     private String lastLoginAt;
     private String createdAt;
     private boolean customAuth = false;
+
+    /**
+     * <h1>PT-BR</h1>
+     * <p>
+     * Utilize este método para saber se os detalhes do usuário já foram carregados e são válidos.
+     * </p>
+     * <h1>EN-US</h1>
+     * <p>Use this method to find out if the user details have already been loaded and are valid.</p>
+     *
+     * @return
+     */
+    public boolean detailsIsPresent() {
+        return details != null;
+    }
+
+    public boolean isAnonymous(){
+        return email.isEmpty() || email == null;
+    }
 
     /**
      * <h1>PT-BR</h1>

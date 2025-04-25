@@ -37,5 +37,7 @@ build/
 ### Mac OS ###
 .DS_Store
 
+service-account.json
 test-credentials.json
 firebase.persistent
+*.db
