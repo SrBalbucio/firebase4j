@@ -27,4 +27,4 @@ Visit the [Firebase4J Wiki](https://github.com/SrBalbucio/firebase4j/wiki) to le
 
 The Firebase4J logo is for demonstration purposes only and is not official. You should not use or replace the official logo in your applications. 
 
-[//]: # (#### Find out [more here]&#40;https://github.com/SrBalbucio/firebase4j/wiki/Legal&#41;.)
+#### Find out [more here](https://github.com/SrBalbucio/firebase4j/wiki/Legal).

@@ -53,7 +53,7 @@ public class User {
     }
 
     public boolean isAnonymous(){
-        return email.isEmpty() || email == null;
+        return email == null ||email.isEmpty();
     }
 
     /**
