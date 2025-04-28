@@ -188,6 +188,7 @@ public abstract class FirebaseAuth {
      * @param overwrite
      */
     public void changeCurrentUser(User user, boolean overwrite) throws AlreadyLoggedException {
+        if (options.isAdminSdk()) return;
         if (currentUser != null && !overwrite) {
             throw new AlreadyLoggedException(user);
         }
@@ -196,7 +197,7 @@ public abstract class FirebaseAuth {
         options.getPersistent().saveCurrentUser(user);
     }
 
-    public boolean isLogged(){
+    public boolean isLogged() {
         return currentUser != null;
     }
 
@@ -215,7 +216,7 @@ public abstract class FirebaseAuth {
             case "USER_NOT_FOUND":
                 return new UserNotFoundException(msg, ((JSONObject) data).getString("idToken"));
             case "ADMIN_ONLY_OPERATION":
-                return new VMDisconnectedException("The method used for login is not configured!");
+                return new BadConfigurationException("The method used for login is not configured!");
             default:
                 return new RuntimeException(msg);
         }

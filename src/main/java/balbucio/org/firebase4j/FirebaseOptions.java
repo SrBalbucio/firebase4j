@@ -98,6 +98,9 @@ public class FirebaseOptions {
     private GoogleCredentials serviceAccountCredentials = null;
     @Getter
     private RSAPrivateKey privateKey;
+    @Getter
+    @Setter
+    private boolean adminSdk;
 
     public FirebaseOptions(@NonNull Gson gson, @NonNull String apiKey, @NonNull String authDomain, @NonNull String databaseURL, @NonNull String projectId, @NonNull String storageBucket, @NonNull String messagingSenderId, @NonNull String appId, @NonNull String measurementId, String emailTest) {
         this.gson = gson;

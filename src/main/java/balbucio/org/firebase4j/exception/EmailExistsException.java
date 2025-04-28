@@ -8,7 +8,7 @@ import lombok.Getter;
 public class EmailExistsException extends Exception{
 
     @Getter
-    private String email;
+    private final String email;
 
     public EmailExistsException(String message, String email) {
         super(message);
