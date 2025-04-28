@@ -204,19 +204,28 @@ public abstract class FirebaseAuth {
     public Exception processError(Connection.Response response, Object data) {
         JSONObject error = new JSONObject(response.body())
                 .getJSONObject("error");
-        String msg = error.getString("message");
+        String msg = error.getString("message").toUpperCase();
 
         switch (msg) {
             case "OPERATION_NOT_ALLOWED":
                 return new OperationNotAllowedException(msg);
             case "EMAIL_EXISTS":
-                return new EmailExistsException(msg, ((JSONObject) data).getString("email"));
+                return new EmailExistsException(msg, ((JSONObject) data).optString("email"));
             case "INVALID_ID_TOKEN":
-                return new InvalidIdTokenException(msg, ((JSONObject) data).getString("idToken"));
+                return new InvalidIdTokenException(msg, ((JSONObject) data).optString("idToken"));
             case "USER_NOT_FOUND":
-                return new UserNotFoundException(msg, ((JSONObject) data).getString("idToken"));
+            case "EMAIL_NOT_FOUND":
+                return new UserNotFoundException(msg, ((JSONObject) data).optString("idToken"));
             case "ADMIN_ONLY_OPERATION":
                 return new BadConfigurationException("The method used for login is not configured!");
+            case "PHONE_NUMBER_ALREADY_EXISTS":
+                return new PhoneNumberExistsException(msg, ((JSONObject) data).optString("phoneNumber"));
+            case "INVALID_PASSWORD":
+                return new InvalidPasswordException(msg, ((JSONObject) data).optString("password"));
+            case "USER_DISABLED":
+                return new UserDisabledException(msg);
+            case "TOO_MANY_ATTEMPTS_TRY_LATER":
+                return new TooManyAttemptsTryLater(msg);
             default:
                 return new RuntimeException(msg);
         }
