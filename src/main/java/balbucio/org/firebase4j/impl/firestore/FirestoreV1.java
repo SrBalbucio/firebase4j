@@ -4,14 +4,16 @@ import balbucio.org.firebase4j.FirebaseOptions;
 import balbucio.org.firebase4j.Firestore;
 import balbucio.org.firebase4j.model.DocumentSnapshot;
 import balbucio.org.firebase4j.model.FirestoreDatabase;
+import lombok.NonNull;
 import org.json.JSONObject;
 import org.jsoup.Connection;
+
 import java.util.List;
 import java.util.Map;
 
 public class FirestoreV1 extends Firestore {
 
-    public FirestoreV1(FirebaseOptions options, String databaseName) {
+    public FirestoreV1(@NonNull FirebaseOptions options, @NonNull String databaseName) {
         super(options, databaseName);
         API_URL = "https://firestore.googleapis.com/v1/projects/{project_id}/databases";
         DATABASE_URL = API_URL + "/{database_id}{action}?key={API_KEY}{query}";

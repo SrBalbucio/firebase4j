@@ -2,13 +2,14 @@ package balbucio.org.firebase4j;
 
 import balbucio.org.firebase4j.impl.appCheck.ServerAppCheckV1;
 import balbucio.org.firebase4j.model.AppCheckToken;
+import lombok.NonNull;
 
 import java.io.IOException;
 import java.util.Optional;
 
 public abstract class FirebaseServerAppCheck {
 
-    public static FirebaseServerAppCheck newInstance(FirebaseOptions options) {
+    public static FirebaseServerAppCheck newInstance(@NonNull FirebaseOptions options) {
         return new ServerAppCheckV1(options);
     }
 

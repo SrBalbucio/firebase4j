@@ -6,6 +6,7 @@ import balbucio.org.firebase4j.model.User;
 import balbucio.org.firebase4j.model.UserDetails;
 import com.sun.jdi.VMDisconnectedException;
 import lombok.Getter;
+import lombok.NonNull;
 import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -25,7 +26,7 @@ public abstract class FirebaseAuth {
      * @param options
      * @return
      */
-    public static FirebaseAuth newInstance(FirebaseOptions options) {
+    public static FirebaseAuth newInstance(@NonNull FirebaseOptions options) {
         return new AuthV1(options);
     }
 
@@ -34,7 +35,7 @@ public abstract class FirebaseAuth {
     @Getter
     protected User currentUser;
 
-    protected FirebaseAuth(FirebaseOptions options) {
+    protected FirebaseAuth(@NonNull FirebaseOptions options) {
         this.options = options;
         this.currentUser = options.getPersistent().getCurrentUser(this);
     }

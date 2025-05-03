@@ -4,13 +4,13 @@ import balbucio.org.firebase4j.FirebaseAuth;
 import balbucio.org.firebase4j.FirebaseOptions;
 import balbucio.org.firebase4j.model.User;
 import balbucio.org.firebase4j.model.UserDetails;
+import lombok.NonNull;
 import org.json.JSONObject;
 import org.jsoup.Connection;
 
 public class AuthV1 extends FirebaseAuth {
 
-
-    public AuthV1(FirebaseOptions options) {
+    public AuthV1(@NonNull FirebaseOptions options) {
         super(options);
         API_URL = "https://identitytoolkit.googleapis.com/v1/accounts:{action}?key={api_key}";
     }

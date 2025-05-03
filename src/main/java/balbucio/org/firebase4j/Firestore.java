@@ -4,6 +4,7 @@ import balbucio.org.firebase4j.exception.PermissionDeniedException;
 import balbucio.org.firebase4j.impl.firestore.FirestoreV1;
 import balbucio.org.firebase4j.model.DocumentSnapshot;
 import balbucio.org.firebase4j.model.FirestoreDatabase;
+import lombok.NonNull;
 import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -14,15 +15,15 @@ import java.util.Map;
 
 public abstract class Firestore {
 
-    public static Firestore newInstance(FirebaseOptions options){
+    public static Firestore newInstance(@NonNull FirebaseOptions options) {
         return newInstance(options, "(default)");
     }
 
-    public static Firestore newInstance(FirebaseOptions options, String databaseName) {
+    public static Firestore newInstance(@NonNull FirebaseOptions options, @NonNull String databaseName) {
         return newInstance(options, databaseName, null);
     }
 
-    public static Firestore newInstance(FirebaseOptions options, String databaseName, FirebaseAuth auth) {
+    public static Firestore newInstance(@NonNull FirebaseOptions options, @NonNull String databaseName, FirebaseAuth auth) {
         return new FirestoreV1(options, databaseName).setAuth(auth);
     }
 
@@ -32,7 +33,7 @@ public abstract class Firestore {
     protected String databaseName;
     protected FirebaseAuth auth;
 
-    protected Firestore(FirebaseOptions options, String databaseName) {
+    protected Firestore(@NonNull FirebaseOptions options, @NonNull String databaseName) {
         this.options = options;
         this.databaseName = databaseName;
     }
@@ -72,19 +73,19 @@ public abstract class Firestore {
                 .ignoreContentType(true)
                 .ignoreHttpErrors(true);
 
-        if(auth.isLogged()){
-            connection.header("Authorization", "Bearer "+auth.getCurrentUser().getIdToken());
+        if (auth.isLogged()) {
+            connection.header("Authorization", "Bearer " + auth.getCurrentUser().getIdToken());
         }
 
-        return  connection;
+        return connection;
     }
 
     public Exception processError(Connection.Response response, Object data) {
         JSONObject json = new JSONObject(response.body());
 
-        if(json.has("error")){
+        if (json.has("error")) {
             JSONObject error = json.getJSONObject("error");
-            switch (error.optInt("code",  404)){
+            switch (error.optInt("code", 404)) {
                 case 403:
                     return new PermissionDeniedException(error.getInt("code"));
                 default:
@@ -97,9 +98,14 @@ public abstract class Firestore {
     }
 
     public abstract List<FirestoreDatabase> listDatabases();
+
     public abstract DocumentSnapshot getDocument(String collection, String id) throws Exception;
+
     public abstract DocumentSnapshot getDocument(String database, String collection, String id) throws Exception;
+
     public abstract DocumentSnapshot updateDocument(String database, String collection, String id, Map<String, Object> fields) throws Exception;
+
     public abstract DocumentSnapshot updateDocument(String collection, String id, Map<String, Object> fields) throws Exception;
+
     public abstract void updateDocument(DocumentSnapshot documentSnapshot) throws Exception;
 }

@@ -26,7 +26,7 @@ public class FirebaseOptions {
         allowMethods("PATCH");
     }
 
-    public static FirebaseOptions fromJSON(JSONObject json) {
+    public static FirebaseOptions fromJSON(@NonNull JSONObject json) {
         FirebaseOptions options = new FirebaseOptions(
                 new GsonBuilder().enableComplexMapKeySerialization().serializeNulls().create(),
                 json.getString("apiKey"),
@@ -43,12 +43,12 @@ public class FirebaseOptions {
         return options;
     }
 
-    public static FirebaseOptions fromJsonFile(File path) throws FileNotFoundException {
+    public static FirebaseOptions fromJsonFile(@NonNull File path) throws FileNotFoundException {
         JSONObject json = new JSONObject(new JSONTokener(new FileReader(path)));
         return fromJSON(json);
     }
 
-    public static FirebaseOptions fromClasspath(String path) {
+    public static FirebaseOptions fromClasspath(@NonNull String path) {
         JSONObject json = new JSONObject(
                 new JSONTokener(Objects.requireNonNull(FirebaseOptions.class.getResourceAsStream(path))));
         return fromJSON(json);
@@ -125,7 +125,7 @@ public class FirebaseOptions {
 
     public FirebaseOptions withServiceAccount(InputStream serviceAccount) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
         this.serviceAccount = new JSONObject(new JSONTokener(serviceAccount));
-        this.serviceAccountCredentials = GoogleCredentials.fromStream(serviceAccount)
+        this.serviceAccountCredentials = GoogleCredentials.fromStream(new ByteArrayInputStream(serviceAccount.toString().getBytes()))
                 .createScoped("https://www.googleapis.com/auth/firebase");
         createRSAKey();
         return this;

@@ -6,6 +6,7 @@ import balbucio.org.firebase4j.model.AppCheckToken;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.google.auth.oauth2.GoogleCredentials;
+import lombok.NonNull;
 import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -15,7 +16,7 @@ import java.util.Date;
 import java.util.Optional;
 
 public class ServerAppCheckV1 extends FirebaseServerAppCheck {
-    public ServerAppCheckV1(FirebaseOptions options) {
+    public ServerAppCheckV1(@NonNull FirebaseOptions options) {
         super(options);
     }
 
