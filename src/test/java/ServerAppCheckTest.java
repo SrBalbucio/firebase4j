@@ -14,7 +14,7 @@ public class ServerAppCheckTest {
     private FirebaseServerAppCheck serverAppCheck;
 
     @BeforeAll
-    public void beforeAll() throws Exception{
+    public void beforeAll() throws Exception {
         this.options = FirebaseOptions.fromJsonFile(new File("test-credentials.json"))
                 .withServiceAccount(new File("service-account.json"));
         this.serverAppCheck = FirebaseServerAppCheck.newInstance(options);
@@ -23,9 +23,10 @@ public class ServerAppCheckTest {
     @Test
     @DisplayName("Create a new Token")
     @Order(0)
-    public void createToken() throws Exception{
+    public void createToken() throws Exception {
         Optional<AppCheckToken> token = serverAppCheck.createToken(false);
         Assertions.assertTrue(token.isPresent());
+        System.out.println(token.get());
     }
 
 }
