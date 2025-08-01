@@ -6,7 +6,7 @@
 
     <groupId>balbucio.org.firebase4j</groupId>
     <artifactId>firebase4j</artifactId>
-    <version>0.0.2.ALPHA-09</version>
+    <version>0.0.2.ALPHA-10</version>
     <name>Firebase4J</name>
     <description>Firebase SDK for Java Desktop Applications</description>
 
@@ -54,7 +54,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.36</version>
+            <version>1.18.38</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

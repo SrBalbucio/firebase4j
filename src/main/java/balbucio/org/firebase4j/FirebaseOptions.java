@@ -54,6 +54,11 @@ public class FirebaseOptions {
         return fromJSON(json);
     }
 
+    public static FirebaseOptions fromInputStream(@NonNull InputStream inputStream) {
+        JSONObject json = new JSONObject(new JSONTokener(inputStream));
+        return fromJSON(json);
+    }
+
     @NonNull
     private Gson gson;
     /**
