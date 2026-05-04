@@ -1,4 +1,4 @@
-package balbucio.org.firebase4j.model;
+package balbucio.org.firebase4j.server.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

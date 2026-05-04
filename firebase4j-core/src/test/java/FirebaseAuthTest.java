@@ -6,7 +6,6 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class FirebaseAuthTest {
     @BeforeAll
     @SneakyThrows
     public void init(){
-        options = FirebaseOptions.fromJsonFile(new File("test-credentials.json"));
+        options = FirebaseOptions.fromJsonFile(ProjectTestFiles.file("test-credentials.json"));
         auth = FirebaseAuth.newInstance(options);
     }
 

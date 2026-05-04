@@ -1,8 +1,8 @@
-package balbucio.org.firebase4j.impl.appCheck;
+package balbucio.org.firebase4j.server.impl;
 
-import balbucio.org.firebase4j.FirebaseServerAppCheck;
-import balbucio.org.firebase4j.FirebaseOptions;
-import balbucio.org.firebase4j.model.AppCheckToken;
+import balbucio.org.firebase4j.server.FirebaseServerAppCheck;
+import balbucio.org.firebase4j.server.FirebaseServerOptions;
+import balbucio.org.firebase4j.server.model.AppCheckToken;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -16,29 +16,31 @@ import java.util.Date;
 import java.util.Optional;
 
 public class ServerAppCheckV1 extends FirebaseServerAppCheck {
-    public ServerAppCheckV1(@NonNull FirebaseOptions options) {
+
+    private Date jwtExpiresAt = new Date(0);
+    private String jwtToken;
+
+    public ServerAppCheckV1(@NonNull FirebaseServerOptions options) {
         super(options);
     }
 
-    private Date nextTokenUpdate = new Date();
-    private String jwtToken;
-
     @Override
     public String getJWTToken() {
-        if (nextTokenUpdate.before(new Date()) && jwtToken != null) {
+        Date now = new Date();
+        if (jwtToken != null && jwtExpiresAt.after(now)) {
             return jwtToken;
         }
 
-        String clientEmail = options.getServiceAccount().getString("client_email");
-        long now = System.currentTimeMillis();
+        String clientEmail = options.getServiceAccountJson().getString("client_email");
+        long nowMs = System.currentTimeMillis();
+        jwtExpiresAt = new Date(nowMs + 60 * 60 * 1000L);
         Algorithm algorithm = Algorithm.RSA256(null, options.getPrivateKey());
-        nextTokenUpdate = new Date(now + 60 * 60 * 1000);
         this.jwtToken = JWT.create()
                 .withIssuer(clientEmail)
                 .withSubject(clientEmail)
                 .withAudience("https://firebaseappcheck.googleapis.com/google.firebase.appcheck.v1.TokenExchangeService")
-                .withIssuedAt(new Date(now))
-                .withExpiresAt(nextTokenUpdate)
+                .withIssuedAt(now)
+                .withExpiresAt(jwtExpiresAt)
                 .withClaim("app_id", options.getAppId())
                 .sign(algorithm);
         return jwtToken;

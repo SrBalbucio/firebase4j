@@ -19,7 +19,7 @@ public class FilePersistentTest {
 
     @BeforeAll
     public void create() throws Exception {
-        options = FirebaseOptions.fromJsonFile(new File("test-credentials.json"));
+        options = FirebaseOptions.fromJsonFile(ProjectTestFiles.file("test-credentials.json"));
         options.setPersistent(new FilePersistent(new File("firebase.persistent"), Executors.newCachedThreadPool()));
         auth = FirebaseAuth.newInstance(options);
     }

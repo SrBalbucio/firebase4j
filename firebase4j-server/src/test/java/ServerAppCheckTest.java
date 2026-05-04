@@ -1,23 +1,25 @@
 import balbucio.org.firebase4j.FirebaseOptions;
-import balbucio.org.firebase4j.FirebaseServerAppCheck;
-import balbucio.org.firebase4j.model.AppCheckToken;
+import balbucio.org.firebase4j.server.FirebaseServerAppCheck;
+import balbucio.org.firebase4j.server.FirebaseServerOptions;
+import balbucio.org.firebase4j.server.model.AppCheckToken;
 import org.junit.jupiter.api.*;
 
-import java.io.File;
 import java.util.Optional;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ServerAppCheckTest {
 
-    private FirebaseOptions options;
+    private FirebaseServerOptions serverOptions;
     private FirebaseServerAppCheck serverAppCheck;
 
     @BeforeAll
     public void beforeAll() throws Exception {
-        this.options = FirebaseOptions.fromJsonFile(new File("test-credentials.json"))
-                .withServiceAccount(new File("service-account.json"));
-        this.serverAppCheck = FirebaseServerAppCheck.newInstance(options);
+        FirebaseOptions client = FirebaseOptions.fromJsonFile(ProjectTestFiles.file("test-credentials.json"));
+        this.serverOptions = FirebaseServerOptions.fromClientAndServiceAccount(
+                client,
+                ProjectTestFiles.file("service-account.json"));
+        this.serverAppCheck = FirebaseServerAppCheck.newInstance(serverOptions);
     }
 
     @Test

@@ -10,12 +10,57 @@ Firebase is a trademark of Google LLC.
 
 > This SDK is still under development.
 
-[![](https://img.shields.io/badge/HyperPowered-Use%20the%20official%20repository-yellow?color=%23279BF8&cacheSeconds=3600)](https://maven.hyperpowered.net/#/releases/balbucio/org/firebase4j/firebase4j/)
+[![](https://img.shields.io/badge/HyperPowered-Use%20the%20official%20repository-yellow?color=%23279BF8&cacheSeconds=3600)](https://maven.hyperpowered.net/#/releases/balbucio/org/firebase4j/firebase4j-core/)
+
+## Modules
+
+| Artifact | Use case |
+|----------|----------|
+| `firebase4j-core` | Desktop / client apps: Firebase Auth and Firestore over the REST API, persistence helpers. |
+| `firebase4j-server` | Trusted environments only: App Check token exchange with a Google service account JSON key. Depends on `firebase4j-core`. |
+
+**Maven (desktop only)**
+
+```xml
+<dependency>
+  <groupId>balbucio.org.firebase4j</groupId>
+  <artifactId>firebase4j-core</artifactId>
+  <version>0.1.0</version>
+</dependency>
+```
+
+**Maven (desktop + server App Check)**
+
+```xml
+<dependency>
+  <groupId>balbucio.org.firebase4j</groupId>
+  <artifactId>firebase4j-server</artifactId>
+  <version>0.1.0</version>
+</dependency>
+```
+
+`firebase4j-server` pulls `firebase4j-core` transitively.
+
+### Migrating from the single-module `firebase4j` (0.0.x)
+
+1. Replace the dependency artifact `firebase4j` with `firebase4j-core` (and optionally `firebase4j-server`).
+2. Bump the version to `0.1.0` (or newer).
+3. Server App Check: imports moved from `balbucio.org.firebase4j` to `balbucio.org.firebase4j.server` and `balbucio.org.firebase4j.server.model`. Use `FirebaseServerOptions.fromClientAndServiceAccount(firebaseOptions, serviceAccountFile)` instead of `FirebaseOptions#withServiceAccount`.
 
 ## How it works
 This SDK is completely based on the Rest API which can be found [here](https://firebase.google.com/docs/reference/rest).
 
 This SDK contains some official peculiarities, such as the persistence mode, which must be defined manually.
+
+## Building
+
+From the repository root:
+
+```bash
+mvn verify
+```
+
+Integration tests expect `test-credentials.json` and (for the server module) `service-account.json` at the repository root; use `mvn -DskipTests verify` when those files are not present.
 
 ## Getting Started
 

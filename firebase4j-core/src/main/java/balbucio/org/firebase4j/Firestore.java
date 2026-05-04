@@ -73,7 +73,7 @@ public abstract class Firestore {
                 .ignoreContentType(true)
                 .ignoreHttpErrors(true);
 
-        if (auth.isLogged()) {
+        if (auth != null && auth.isLogged()) {
             connection.header("Authorization", "Bearer " + auth.getCurrentUser().getIdToken());
         }
 

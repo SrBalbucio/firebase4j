@@ -20,7 +20,7 @@ public class MVStorePersistentTest {
 
     @BeforeAll
     public void create() throws Exception {
-        options = FirebaseOptions.fromJsonFile(new File("test-credentials.json"));
+        options = FirebaseOptions.fromJsonFile(ProjectTestFiles.file("test-credentials.json"));
         options.setPersistent(new MVStorePersistent(new File("firebase.mv.db")));
         auth = FirebaseAuth.newInstance(options);
     }

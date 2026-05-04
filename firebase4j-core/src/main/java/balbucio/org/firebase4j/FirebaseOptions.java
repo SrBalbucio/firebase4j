@@ -2,7 +2,6 @@ package balbucio.org.firebase4j;
 
 import balbucio.org.firebase4j.persistent.EmptyPersistent;
 import balbucio.org.firebase4j.persistent.FirebasePersistent;
-import com.google.auth.oauth2.GoogleCredentials;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.*;
@@ -13,10 +12,6 @@ import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.net.HttpURLConnection;
-import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.spec.InvalidKeySpecException;
 import java.util.*;
 
 @Data
@@ -98,12 +93,6 @@ public class FirebaseOptions {
     @NonNull
     private String emailTest;
     @Getter
-    private JSONObject serviceAccount = null;
-    @Getter
-    private GoogleCredentials serviceAccountCredentials = null;
-    @Getter
-    private RSAPrivateKey privateKey;
-    @Getter
     @Setter
     private boolean adminSdk;
 
@@ -118,40 +107,6 @@ public class FirebaseOptions {
         this.appId = appId;
         this.measurementId = measurementId;
         this.emailTest = emailTest;
-    }
-
-    public FirebaseOptions withServiceAccount(JSONObject serviceAccount) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
-        this.serviceAccount = serviceAccount;
-        this.serviceAccountCredentials = GoogleCredentials.fromStream(new ByteArrayInputStream(serviceAccount.toString().getBytes()))
-                .createScoped("https://www.googleapis.com/auth/firebase");
-        createRSAKey();
-        return this;
-    }
-
-    public FirebaseOptions withServiceAccount(InputStream serviceAccount) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
-        this.serviceAccount = new JSONObject(new JSONTokener(serviceAccount));
-        this.serviceAccountCredentials = GoogleCredentials.fromStream(new ByteArrayInputStream(serviceAccount.toString().getBytes()))
-                .createScoped("https://www.googleapis.com/auth/firebase");
-        createRSAKey();
-        return this;
-    }
-
-    public FirebaseOptions withServiceAccount(File path) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
-        withServiceAccount(new JSONObject(new JSONTokener(new FileReader(path))));
-        return this;
-    }
-
-    private void createRSAKey() throws NoSuchAlgorithmException, InvalidKeySpecException {
-        String privateKeyPem = serviceAccount.getString("private_key");
-
-        privateKeyPem = privateKeyPem
-                .replace("-----BEGIN PRIVATE KEY-----", "")
-                .replace("-----END PRIVATE KEY-----", "")
-                .replaceAll("\\s+", "");
-
-        byte[] pkcs8 = Base64.getDecoder().decode(privateKeyPem);
-        this.privateKey = (RSAPrivateKey) KeyFactory.getInstance("RSA")
-                .generatePrivate(new java.security.spec.PKCS8EncodedKeySpec(pkcs8));
     }
 
     private static void allowMethods(String... methods) {

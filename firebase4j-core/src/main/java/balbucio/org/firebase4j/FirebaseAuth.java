@@ -4,7 +4,6 @@ import balbucio.org.firebase4j.exception.*;
 import balbucio.org.firebase4j.impl.auth.AuthV1;
 import balbucio.org.firebase4j.model.User;
 import balbucio.org.firebase4j.model.UserDetails;
-import com.sun.jdi.VMDisconnectedException;
 import lombok.Getter;
 import lombok.NonNull;
 import org.json.JSONObject;

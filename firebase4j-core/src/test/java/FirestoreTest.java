@@ -6,8 +6,6 @@ import balbucio.org.firebase4j.model.User;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 
-import java.io.File;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -23,7 +21,7 @@ public class FirestoreTest {
     @BeforeAll
     @SneakyThrows
     public void init() {
-        options = FirebaseOptions.fromJsonFile(new File("test-credentials.json"));
+        options = FirebaseOptions.fromJsonFile(ProjectTestFiles.file("test-credentials.json"));
         auth = FirebaseAuth.newInstance(options);
         firestore = Firestore.newInstance(options, "(default)", auth);
         createdUser = auth.signInAnonymously();
