@@ -62,9 +62,13 @@ mvn verify
 
 Integration tests expect `test-credentials.json` and (for the server module) `service-account.json` at the repository root; use `mvn -DskipTests verify` when those files are not present.
 
+## Documentation
+
+Full documentation for this repository lives in **[docs/](docs/README.md)** (Portuguese), covering configuration, Auth, Firestore, persistence, the server module, exceptions, build, and migration.
+
 ## Getting Started
 
-Visit the [Firebase4J Wiki](https://github.com/SrBalbucio/firebase4j/wiki) to learn how to use the SDK.
+Visit the [Firebase4J Wiki](https://github.com/SrBalbucio/firebase4j/wiki) to learn how to use the SDK, or start from the [docs index](docs/README.md).
 
 ## Legal attribution
 
