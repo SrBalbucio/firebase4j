@@ -33,7 +33,7 @@
         <json.version>20240303</json.version>
         <gson.version>2.11.0</gson.version>
         <lombok.version>1.18.38</lombok.version>
-        <jsoup.version>1.17.2</jsoup.version>
+        <jsoup.version>1.23.1</jsoup.version>
         <h2-mvstore.version>2.3.230</h2-mvstore.version>
         <throwable.version>1.2.2</throwable.version>
         <google-auth.version>1.33.1</google-auth.version>
